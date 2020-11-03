@@ -344,6 +344,16 @@
                 </div>
             </div>
 
+            <div class="row mt-3">
+                <div class="col-12 mx-auto card-footer 
+                    small text-secondary text-center border-0 bg-light">
+                    New Member Contribution
+                </div>
+                <div class="col-12 mx-auto svg-container text-center small"
+                    id="canvas-ld-memcontr-new">
+                </div>
+            </div>
+
         </div>
     </div>
     </div>
@@ -363,6 +373,10 @@
 
 <script src="{{url_for('static', filename='js/arya-data.js')}}"></script>
 <script src="{{url_for('static', filename='js/arya-controller.js')}}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 
 <script>
     /* Data import */
@@ -422,6 +436,34 @@
                     d3.select("div#canvas-proc-m > svg")
                         .on("dblclick.zoom", null);
                 });
+        }
+    }
+
+    // new New Member Contribution diagram
+    function renderLDMemContrNew(data) {
+        if (data != null) {
+            var i=0;
+            var arr = [];
+            Object.keys(data).forEach(function(key) {
+                arr.push("Name : " + key + ", Value : " + data[key]);
+            })
+            console.log(arr);
+
+            var newMembContrDiagram = {
+                "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+                "description": "This is the new Member Contribution Diagram",
+                "data": {
+                    "values": [
+                    {"Name" : "Bob", "Value" : 0}, {"Name" : "Pete", "Value" : 1}
+                    ]
+                },
+                "mark": "bar",
+                "encoding": {
+                    "x": {"field": "Value", "type": "quantitative"},
+                    "y": {"field": "Name", "type": "nominal"}
+                }
+            } 
+            vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram);  
         }
     }
 
