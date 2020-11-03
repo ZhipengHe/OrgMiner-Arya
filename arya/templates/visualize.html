@@ -441,29 +441,42 @@
 
     // new New Member Contribution diagram
     function renderLDMemContrNew(data) {
+        d3.select("#canvas-ld-memcontr-new").selectAll("svg").remove();
         if (data != null) {
-            var i=0;
             var arr = [];
             Object.keys(data).forEach(function(key) {
-                arr.push("Name : " + key + ", Value : " + data[key]);
+                arr.push({"Name" : key, "Value" : data[key]});
             })
             console.log(arr);
 
             var newMembContrDiagram = {
                 "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+
                 "description": "This is the new Member Contribution Diagram",
+
                 "data": {
-                    "values": [
-                    {"Name" : "Bob", "Value" : 0}, {"Name" : "Pete", "Value" : 1}
-                    ]
+                    "values": arr
                 },
+
                 "mark": "bar",
+
                 "encoding": {
                     "x": {"field": "Value", "type": "quantitative"},
                     "y": {"field": "Name", "type": "nominal"}
+                },
+
+                "config": {
+                    "background": "#f8f9fa"
+                },
+
+                "usermeta": {
+                    "embedOptions": {
+                        "renderer": "svg"
+                    }
                 }
             } 
-            vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram);  
+
+            vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram);
         }
     }
 
