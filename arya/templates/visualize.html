@@ -443,6 +443,19 @@
     function renderLDMemContrNew(data) {
         d3.select("#canvas-ld-memcontr-new").selectAll("svg").remove();
         if (data != null) {
+            const margin = {top: 25, right: 25, bottom: 40, left: 80};
+            const width = (
+                Math.floor($("#canvas-ld-memcontr").width() * 0.85)
+                - margin["left"] - margin["right"]);
+            const height = (
+                Math.max(
+                    width * 0.5,
+                    Object.keys(data).length * 20
+                )
+                - margin["top"] - margin["bottom"]
+            );
+
+
             var arr = [];
             Object.keys(data).forEach(function(key) {
                 arr.push({"Name" : key, "Value" : data[key]});
@@ -454,19 +467,64 @@
 
                 "description": "This is the new Member Contribution Diagram",
 
+                "width": width,
+
+                "height": height,
+
                 "data": {
                     "values": arr
                 },
 
-                "mark": "bar",
+                "transform": [
+                    {"joinaggregate": [{"op": "sum", "field": "Value", "as": "TotalValue"}]},
+                    {"calculate": "datum.Value/datum.TotalValue", "as": "PercentOfTotal"}
+                ],
 
                 "encoding": {
-                    "x": {"field": "Value", "type": "quantitative"},
-                    "y": {"field": "Name", "type": "nominal"}
+                    "x": {
+                        "field": "PercentOfTotal", 
+                        "type": "quantitative", 
+                        "title": "", 
+                        "scale": {
+                            "domain": [0,1]
+                        },
+                        "axis": {
+                            "format": ".0%",
+                            "labelAngle": -45,
+                        },
+                        
+                    },
+                    "y": {
+                        "field": "Name", 
+                        "type": "nominal", 
+                        "title": "",
+                        "axis": {
+                            "labelFont": "sans-serif"
+                        }
+                    }
                 },
 
+                "layer": [
+                    {"mark": {"type": "bar", "color": "gold"}},
+                    {
+                        "mark": {
+                            "type": "text",
+                            "align": "left",
+                            "baseline": "middle",
+                            "dx": 3
+                            },
+                        "encoding": {
+                            "text": {"field": "PercentOfTotal", "type": "quantitative", "format": ".0%"}
+                        }
+                }
+                ],
+
                 "config": {
-                    "background": "#f8f9fa"
+                    "background": "#f8f9fa",
+                    "axis": {
+                        "grid": false
+                    },
+                    "padding": margin
                 },
 
                 "usermeta": {
@@ -476,7 +534,9 @@
                 }
             } 
 
-            vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram);
+            vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram, {
+                actions: false
+            });
         }
     }
 
