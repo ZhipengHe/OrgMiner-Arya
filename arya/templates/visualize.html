@@ -447,9 +447,9 @@
     function renderLDMemContrNew(data) {
         d3.select("#canvas-ld-memcontr-new").selectAll("svg").remove();
         if (data != null) {
-            const margin = {top: 25, right: 25, bottom: 40, left: 80};
+            const margin = {top: 25, right: 25, bottom: 40, left: 70};
             const width = (
-                Math.floor($("#canvas-ld-memcontr").width() * 0.85)
+                Math.floor($("#canvas-ld-memcontr").width() * 0.9)
                 - margin["left"] - margin["right"]);
             const height = (
                 Math.max(
@@ -464,7 +464,7 @@
             Object.keys(data).forEach(function(key) {
                 arr.push({"Name" : key, "Value" : data[key]});
             })
-            console.log(arr);
+            // console.log(arr);
 
             var newMembContrDiagram = {
                 // not work recently
@@ -498,6 +498,8 @@
                         "axis": {
                             "format": ".0%",
                             "labelAngle": -45,
+                            "values": [0, 0.25, 0.5, 0.75, 1],
+                            "offset": 2
                         },
                         
                     },
@@ -512,7 +514,15 @@
                 },
 
                 "layer": [
-                    {"mark": {"type": "bar", "color": "gold"}},
+                    {
+                        "mark": {
+                            "type": "bar", 
+                            "color": "gold", 
+                            "cornerRadius": 4, 
+                            "cornerRadiusEnd": 4,
+                            "stroke": "grey"
+                        }
+                    },
                     {
                         "mark": {
                             "type": "text",
@@ -527,11 +537,14 @@
                 ],
 
                 "config": {
-                    "background": "#f8f9fa",
+                    "background": "transparent",
                     "axis": {
                         "grid": false
                     },
-                    "padding": margin
+                    "padding": margin,
+                    "view": {
+                        "stroke": "transparent"
+                    }
                 },
 
                 "usermeta": {
