@@ -349,7 +349,7 @@
                     small text-secondary text-center border-0 bg-light">
                     New Member Contribution
                 </div>
-                <div class="col-12 mx-auto text-center small"
+                <div class="col-12 mx-auto svg-container text-center small"
                     id="canvas-ld-memcontr-new">
                 </div>
             </div>
@@ -447,7 +447,8 @@
     function renderLDMemContrNew(data) {
         d3.select("#canvas-ld-memcontr-new").selectAll("svg").remove();
         if (data != null) {
-            const margin = {top: 25, right: 25, bottom: 40, left: 70};
+            const margin = {top: Math.floor($("#canvas-ld-memcontr").width() * 0.05), right: Math.floor($("#canvas-ld-memcontr").width() * 0.1), 
+            bottom: Math.floor($("#canvas-ld-memcontr").width() * 0.1), left: Math.floor($("#canvas-ld-memcontr").width() * 0.15)};
             const width = (
                 Math.floor($("#canvas-ld-memcontr").width() * 0.9)
                 - margin["left"] - margin["right"]);
