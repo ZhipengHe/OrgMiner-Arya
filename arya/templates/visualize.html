@@ -349,7 +349,7 @@
                     small text-secondary text-center border-0 bg-light">
                     New Member Contribution
                 </div>
-                <div class="col-12 mx-auto svg-container text-center small"
+                <div class="col-12 mx-auto text-center small"
                     id="canvas-ld-memcontr-new">
                 </div>
             </div>
@@ -467,8 +467,6 @@
             // console.log(arr);
 
             var newMembContrDiagram = {
-                // not work recently
-                // "$schema": "./vega-lite-schema.json",
 
                 "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
 
@@ -499,7 +497,8 @@
                             "format": ".0%",
                             "labelAngle": -45,
                             "values": [0, 0.25, 0.5, 0.75, 1],
-                            "offset": 2
+                            "offset": 2,
+                            "labelFontWeight": "bold"
                         },
                         
                     },
@@ -508,7 +507,8 @@
                         "type": "nominal", 
                         "title": "",
                         "axis": {
-                            "labelFont": "sans-serif"
+                            "labelFont": "sans-serif",
+                            "labelFontWeight": "bold"
                         }
                     }
                 },
@@ -520,7 +520,8 @@
                             "color": "gold", 
                             "cornerRadius": 4, 
                             "cornerRadiusEnd": 4,
-                            "stroke": "grey"
+                            "stroke": "grey",
+                            "tooltip": true
                         }
                     },
                     {
@@ -531,7 +532,7 @@
                             "dx": 3
                             },
                         "encoding": {
-                            "text": {"field": "PercentOfTotal", "type": "quantitative", "format": ".0%"}
+                            "text": {"field": "PercentOfTotal", "type": "quantitative", "format": ".0%", "fontWeight": "bold"}
                         }
                 }
                 ],
@@ -555,8 +556,11 @@
             } 
 
             vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram, {
+                tooltip: {theme: 'dark'},
                 actions: false
-            });
+            }).then(function(result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);;
         }
     }
 
