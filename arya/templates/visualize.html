@@ -374,9 +374,13 @@
 <script src="{{url_for('static', filename='js/arya-data.js')}}"></script>
 <script src="{{url_for('static', filename='js/arya-controller.js')}}"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
 <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
-<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+<script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script> -->
+
+<script src="{{url_for('static', filename='js/vega.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/vega-lite.min.js')}}"></script>
+<script src="{{url_for('static', filename='js/vega-embed.min.js')}}"></script>
 
 <script>
     /* Data import */
@@ -463,6 +467,9 @@
             console.log(arr);
 
             var newMembContrDiagram = {
+                // not work recently
+                // "$schema": "./vega-lite-schema.json",
+
                 "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
 
                 "description": "This is the new Member Contribution Diagram",
