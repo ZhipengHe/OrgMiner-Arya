@@ -443,6 +443,23 @@
         }
     }
 
+    // Solution for avoiding multiple fires
+    function windowResizeEvent() {
+        var target = this;
+        if (target.resizeFlag) {
+            clearTimeout(target.resizeFlag);
+        }
+
+        target.resizeFlag = setTimeout(function() {
+            renderLDMemContrNew();
+            console.log("resize triggered");
+            target.resizeFlag = null;
+        }, 100);
+    }
+
+    // add event listener for window resize
+    window.addEventListener('resize', windowResizeEvent);
+
     // new New Member Contribution diagram
     function renderLDMemContrNew(data) {
         d3.select("#canvas-ld-memcontr-new").selectAll("svg").remove();
