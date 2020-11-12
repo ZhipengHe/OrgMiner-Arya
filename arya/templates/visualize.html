@@ -14,7 +14,7 @@
 {% endif %}
 
 <!-- Left panel: for model visualization -->
-<div class="col-9">
+<div id="left-panel" class="my-col-12">
     <!-- Organizational model view-->
     <div class="row my-3" id="view-org-m">
     <div class="col">
@@ -37,6 +37,18 @@
                     <label class="custom-control-label"
                         for="switch-view-proc-m">
                         Toggle process model view
+                    </label>
+                    </div>
+                </li>
+                <li class="nav-item ml-2">
+                </li>
+                <li class="nav-item ml-2">
+                    <div class="nav-link custom-control custom-switch">
+                    <input type="checkbox" class="custom-control-input"
+                        id="switch-view-right-panel">
+                    <label class="custom-control-label"
+                        for="switch-view-right-panel">
+                        Toggle right bar view
                     </label>
                     </div>
                 </li>
@@ -109,7 +121,7 @@
 </div>
 
 <!-- Right panel: for statistics report -->
-<div class="col-3">
+<div class="col-3 collapse" id="right-panel">
     <!-- Stats of global conformance -->
     <div class="row my-3 text-nowrap">
     <div class="col">
@@ -725,6 +737,13 @@
 
     $("#switch-view-proc-m").click(function() {
         $("#view-proc-m").collapse("toggle");
+    });
+
+    // toggle for right bar
+    $("#switch-view-right-panel").click(function() {
+        $("#left-panel").toggleClass("my-col-9")
+        $("#right-panel").collapse("toggle");
+        // $('#right-bar').toggleClass('active');
     });
 
     $("#show-toy-log").click(function() {
