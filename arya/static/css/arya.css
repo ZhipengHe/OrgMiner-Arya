@@ -20,17 +20,6 @@ caption {
 	overflow: hidden; 
 }
 
-.my-col-12 {
-  position: relative;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-
-  -ms-flex: 0 0 100%;
-  flex: 0 0 100%;
-  max-width: 100%;
-}
-
 .my-col-9 {
   position: relative;
   width: 100%;
@@ -40,4 +29,10 @@ caption {
   -ms-flex: 0 0 75%;
   flex: 0 0 75%;
   max-width: 75%;
+}
+
+.collapsing {
+  -webkit-transition: none;
+    transition: none;
+    display: none;
 }

@@ -14,7 +14,7 @@
 {% endif %}
 
 <!-- Left panel: for model visualization -->
-<div id="left-panel" class="my-col-12">
+<div id="left-panel" class="col-12">
     <!-- Organizational model view-->
     <div class="row my-3" id="view-org-m">
     <div class="col">
@@ -121,7 +121,7 @@
 </div>
 
 <!-- Right panel: for statistics report -->
-<div class="col-3 collapse" id="right-panel">
+<div class="collapse" id="right-panel">
     <!-- Stats of global conformance -->
     <div class="row my-3 text-nowrap">
     <div class="col">
@@ -741,9 +741,8 @@
 
     // toggle for right bar
     $("#switch-view-right-panel").click(function() {
-        $("#left-panel").toggleClass("my-col-9")
-        $("#right-panel").collapse("toggle");
-        // $('#right-bar').toggleClass('active');
+        $("#right-panel").toggleClass("col-3").collapse("toggle");
+        $("#left-panel").toggleClass("my-col-9");
     });
 
     $("#show-toy-log").click(function() {
