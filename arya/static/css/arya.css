@@ -11,3 +11,53 @@ caption {
 }
 
 /*--------------------------------------------------------------------*/
+
+.svg-container {
+  display: inline-block;
+  position: relative;
+	width: 100%;
+	vertical-align: middle; 
+	overflow: hidden; 
+}
+
+.my-col-9 {
+  position: relative;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+
+  -ms-flex: 0 0 75%;
+  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+/* disable animation*/
+.collapsing {
+  -webkit-transition: none;
+    transition: none;
+    display: none;
+}
+
+
+/* Style the links inside the sidenav */
+#mySidenav button {
+  position: absolute; /* Position them relative to the browser window */
+  right: -80px; /* Position them outside of the screen */
+  transition: 0.3s; /* Add transition on hover */
+  padding: 15px; /* 15px padding */
+  width: 100px; /* Set a specific width */
+  text-decoration: none; /* Remove underline */
+  font-size: 20px; /* Increase font size */
+  color: white; /* White text color */
+  border-radius: 5px 0 0 5px; /* Rounded corners on the top left and bottom left side */
+}
+
+#mySidenav button:hover {
+  right: 0; /* On mouse-over, make the elements appear as they should */
+}
+
+/* 20px from the top with a background */
+#switch-view-right-panel {
+  top: 20px;
+  background-color: #17a2b8;
+}
