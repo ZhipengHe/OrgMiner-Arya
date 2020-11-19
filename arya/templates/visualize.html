@@ -344,6 +344,16 @@
                 </div>
             </div>
 
+            <div class="row mt-3">
+                <div class="col-12 mx-auto card-footer 
+                    small text-secondary text-center border-0 bg-light">
+                    New Member Contribution
+                </div>
+                <div class="col-12 mx-auto svg-container text-center small"
+                    id="canvas-ld-memcontr-new">
+                </div>
+            </div>
+
         </div>
     </div>
     </div>
@@ -426,6 +436,128 @@
                     d3.select("div#canvas-proc-m > svg")
                         .on("dblclick.zoom", null);
                 });
+        }
+    }
+
+    // new New Member Contribution diagram
+    function renderLDMemContrNew(data) {
+        d3.select("#canvas-ld-memcontr-new").selectAll("svg").remove();
+        if (data != null) {
+            const margin = {top: Math.floor($("#canvas-ld-memcontr").width() * 0.05), right: Math.floor($("#canvas-ld-memcontr").width() * 0.1), 
+            bottom: Math.floor($("#canvas-ld-memcontr").width() * 0.1), left: Math.floor($("#canvas-ld-memcontr").width() * 0.15)};
+            const width = (
+                Math.floor($("#canvas-ld-memcontr").width() * 0.9)
+                - margin["left"] - margin["right"]);
+            const height = (
+                Math.max(
+                    width * 0.5,
+                    Object.keys(data).length * 20
+                )
+                - margin["top"] - margin["bottom"]
+            );
+
+
+            var arr = [];
+            Object.keys(data).forEach(function(key) {
+                arr.push({"Name" : key, "Value" : data[key]});
+            })
+            // console.log(arr);
+
+            var newMembContrDiagram = {
+
+                "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+
+                "description": "This is the new Member Contribution Diagram",
+
+                "width": width,
+
+                "height": height,
+
+                "data": {
+                    "values": arr
+                },
+
+                "transform": [
+                    {"joinaggregate": [{"op": "sum", "field": "Value", "as": "TotalValue"}]},
+                    {"calculate": "datum.Value/datum.TotalValue", "as": "PercentOfTotal"}
+                ],
+
+                "encoding": {
+                    "x": {
+                        "field": "PercentOfTotal", 
+                        "type": "quantitative", 
+                        "title": "", 
+                        "scale": {
+                            "domain": [0,1]
+                        },
+                        "axis": {
+                            "format": ".0%",
+                            "labelAngle": -45,
+                            "values": [0, 0.25, 0.5, 0.75, 1],
+                            "offset": 2,
+                            "labelFontWeight": "bold"
+                        },
+
+                    },
+                    "y": {
+                        "field": "Name", 
+                        "type": "nominal", 
+                        "title": "",
+                        "axis": {
+                            "labelFont": "sans-serif",
+                            "labelFontWeight": "bold"
+                        }
+                    }
+                },
+
+                "layer": [
+                    {
+                        "mark": {
+                            "type": "bar", 
+                            "color": "gold", 
+                            "cornerRadius": 4, 
+                            "cornerRadiusEnd": 4,
+                            "stroke": "grey",
+                            "tooltip": true
+                        }
+                    },
+                    {
+                        "mark": {
+                            "type": "text",
+                            "align": "left",
+                            "baseline": "middle",
+                            "dx": 3
+                            },
+                        "encoding": {
+                            "text": {"field": "PercentOfTotal", "type": "quantitative", "format": ".0%", "fontWeight": "bold"}
+                        }
+                }
+                ],
+
+                "config": {
+                    "background": "transparent",
+                    "axis": {
+                        "grid": false
+                    },
+                    "padding": margin,
+                    "view": {
+                        "stroke": "transparent"
+                    }
+                },
+
+                "usermeta": {
+                    "embedOptions": {
+                        "renderer": "svg"
+                    }
+                }
+            } 
+
+            vegaEmbed('#canvas-ld-memcontr-new', newMembContrDiagram, {
+                tooltip: {theme: 'dark'},
+                actions: false
+            }).then(function(result) {
+                // Access the Vega view instance (https://vega.github.io/vega/docs/api/view/) as result.view
+            }).catch(console.error);;
         }
     }
 
