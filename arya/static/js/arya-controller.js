@@ -316,6 +316,9 @@ class Waiter {
                 );
                 renderProcM();
                 renderLDMemContr();
+                
+                // for test
+                renderLDMemContrNew();
             }
         });
     }
@@ -390,6 +393,9 @@ class Waiter {
                     );
                     renderProcM();
                     renderLDMemContr();
+
+                    // for test
+                    renderLDMemContrNew();
                 }
             } else if (self.df.modeTree.getNodeLevel(modeNodeId) == 2) {
                 // dblclick on second level execution modes
@@ -475,6 +481,9 @@ class Waiter {
                     );
                     renderProcM();
                     renderLDMemContr();
+                    
+                    // for test
+                    renderLDMemContrNew();
                 }
 
             } else if (self.df.modeTree.getNodeLevel(modeNodeId) == 3) {
@@ -535,6 +544,12 @@ class Waiter {
                             renderLDMemContr(
                                 respData["group_member_contribution"]
                             );
+	
+                            // for test
+                            renderLDMemContrNew(
+                                respData["group_member_contribution"]
+                            );
+
                         })
                         .post(JSON.stringify({
                             "case_type": ct,
