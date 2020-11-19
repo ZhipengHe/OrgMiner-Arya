@@ -14,7 +14,7 @@
 {% endif %}
 
 <!-- Left panel: for model visualization -->
-<div class="col-9">
+<div id="left-panel" class="col-12">
     <!-- Organizational model view-->
     <div class="row my-3" id="view-org-m">
     <div class="col">
@@ -109,7 +109,7 @@
 </div>
 
 <!-- Right panel: for statistics report -->
-<div class="col-3">
+<div class="collapse" id="right-panel">
     <!-- Stats of global conformance -->
     <div class="row my-3 text-nowrap">
     <div class="col">
@@ -358,6 +358,13 @@
     </div>
     </div>
 
+</div>
+
+<div id="mySidenav" class="sidenav">
+    <button type="button" id="switch-view-right-panel" class="btn btn-info">
+        <i class="fas fa-align-left"></i>
+        <span>Sidebar</span>
+    </button>
 </div>
 
 <!-- End of outer row -->
@@ -704,6 +711,12 @@
 
     $("#switch-view-proc-m").click(function() {
         $("#view-proc-m").collapse("toggle");
+    });
+
+    // toggle for right bar
+    $("#switch-view-right-panel").click(function() {
+        $("#right-panel").toggleClass("col-3").collapse("toggle");
+        $("#left-panel").toggleClass("my-col-9");
     });
 
     $("#show-toy-log").click(function() {
