@@ -1,0 +1,47 @@
+<h4> Resource Group Profiles </h4>
+
+<h5> Reporting snapshots </h5>
+<ul>
+<li>
+    <a href="{{ url_for('tests.show_profiles_workload',
+    indicator='stake') }}" target="_blank"> 
+    workload: stake 
+</a></li>
+<li>
+    <a href="{{ url_for('tests.show_profiles_workload', indicator='assignment') }}" target="_blank"> 
+    workload: assignment 
+</a></li>
+<li>
+    <a href="{{ url_for('tests.show_profiles_workload', indicator='relative_focus') }}" target="_blank"> 
+    workload: relative_focus 
+</a></li>
+<li>
+    <a href="{{ url_for('tests.show_profiles_workload', indicator='relative_stake') }}" target="_blank"> 
+    workload: relative_stake 
+</a></li>
+<li>
+    <a href="{{ url_for('tests.show_profiles_participation', indicator='attendance') }}" target="_blank"> 
+    participation: attendance </a></li>
+<li>
+    <a href="{{ url_for('tests.show_profiles_distribution',
+    indicator='member_load') }}?group=muni-1" target="_blank"> 
+    distribution: member_load (need to specify group)
+</a></li>
+<li>
+    <a href="{{ url_for('tests.show_profiles_distribution', indicator='member_assignment') }}" target="_blank"> 
+    distribution: member_assignment 
+</a></li>
+</ul>
+
+<h5> Tracking changes over time </h5>
+<ul>
+<li>
+    <a href="{{ url_for('tests.track_profiles_workload', indicator='stake') }}" target="_blank"> 
+    tracking workload: stake over time
+</a></li>
+<li>
+    <a href="{{ url_for('tests.track_profiles_distribution', indicator='member_load') }}?group=muni-1" target="_blank"> 
+    tracking distribution: member_load over time
+</a></li>
+
+</ul>

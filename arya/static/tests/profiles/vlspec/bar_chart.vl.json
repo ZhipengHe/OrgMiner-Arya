@@ -1,0 +1,50 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "bar chart",
+  "title": null,
+
+  "width": 960,
+  "height": 500,
+
+  "transform": [],
+
+  "config": {
+    "range": {
+      "category": {"scheme": "tableau20"}
+    },
+    "axisX": {
+      "labelAngle": -45
+    }
+  },
+
+  "encoding": {
+    "x": {
+      "field": null,
+      "title": null
+    },
+    "y": {
+      "field": null,
+      "title": null
+    },
+    "color": {
+      "field": null
+    }
+  },
+
+  "layer": [
+    {
+      "mark": "bar"
+    },
+    {
+      "mark": {
+        "type": "text", 
+        "fontSize": 15,
+        "dy": -20
+      },
+      "encoding": {
+        "text": {"field": null, "format": ".2%"},
+        "color": {"value": "black"}
+      }
+    }
+  ]
+}

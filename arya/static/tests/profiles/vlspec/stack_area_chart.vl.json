@@ -1,0 +1,86 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "stack area chart",
+  "title": null,
+
+  "width": 960,
+  "height": 500,
+
+  "config": {
+    "range": {
+      "category": {"scheme": "tableau20"}
+    },
+    "axisX": {
+      "labelAngle": -45
+    }
+  },
+
+  "transform": [{
+    "timeUnit": null,
+    "field": null,
+    "as": "datetime"
+  }],
+
+  "encoding": {
+    "x": {
+      "field": "datetime",
+      "title": "Datetime",
+      "type": "temporal",
+      "axis": {
+        "format": "%B",
+        "labelExpr": "[timeFormat(datum.value, '%b'), timeFormat(datum.value, '%m') == '01' ? timeFormat(datum.value, '%Y') : '']"
+      }
+    }
+  },
+
+  "layer": [
+    {
+      "mark": "area",
+      "selection": {
+        "category": {
+          "type": "multi", 
+          "fields": [], 
+          "bind": "legend"
+        }
+      },
+      "encoding": {
+        "y": {
+          "aggregate": null, 
+          "field": null,
+          "title": null
+        },
+        "color": {
+          "field": null
+        },
+        "opacity": {
+          "condition": {"selection": "category", "value": 1},
+          "value": 0.1
+        }
+      }
+    },
+
+    {
+      "mark": "rule",
+      "transform": [{"pivot": null, "value": null, "groupby": ["datetime"]}],
+      "encoding": {
+        "opacity": {
+          "condition": {"value": 0.5, "selection": "hover"},
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "datetime", "type": "temporal", "format": "%B %Y"}
+        ]
+      },
+      "selection": {
+        "hover": {
+          "type": "single",
+          "fields": ["datetime"],
+          "nearest": true,
+          "on": "mouseover",
+          "empty": "none",
+          "clear": "mouseout"
+        }
+      }
+    }
+  ]
+}

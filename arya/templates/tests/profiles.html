@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{ name }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4.17.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.12.2"></script>
+  </head>
+  <body>
+    <a href="{{ url_for('tests.index') }}"> Back to ToC</a>
+    <h2> {{ name }} </h2>
+    <div id="vis" style="margin: auto;"></div>
+
+    <h4><i> Related Views </i></h4>
+    <ul>
+      {% for view in rel_views %}
+      <li><a href="{{ view.link }}" target="_blank">
+        {{ view.name }}
+      </a></li>
+      {% endfor %}
+    </ul>
+  </body>
+
+  <script type="text/javascript">
+    /* feed the specification file data to var vlSpec */
+    var vlSpec = {{ spec|tojson }};
+    vegaEmbed('#vis', vlSpec);
+  </script>

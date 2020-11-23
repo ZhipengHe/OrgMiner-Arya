@@ -1,0 +1,90 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "re-orderable matrix",
+  "title": null,
+  "width": {"step": 75},
+  "height": {"step": 75},
+
+  "transform": [
+    {"calculate": "year(datum.date)", "as": "year"},
+    {"filter": {"selection": "Granularity"}}
+  ],
+
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "range": {
+      "heatmap": {
+        "scheme": null
+      }
+    },
+    "axis": {
+      "domain": true
+    },
+    "axisX": {
+      "labelAngle": -45
+    }
+  },
+
+  "encoding": {
+    "x": {
+      "field": null,
+      "type": "nominal",
+      "title": null
+    },
+    "y": {
+      "field": null,
+      "type": "nominal",
+      "title": null
+    }
+  },
+  "layer": [
+    {
+      "selection": {
+        "Granularity": {
+          "type": "single", "fields": ["year"],
+          "init": {"year": 2011, "month": 1},
+          "bind": {
+            "year": {"input": "range", "min": 2011, "max": 2014, "step": 1},
+            "month": {"input": "range", "min": 0, "max": 11, "step": 1}
+          }
+        }
+      },
+      "mark": "rect",
+      "encoding": {
+        "color": {
+          "field": null,
+          "type": "quantitative",
+          "legend": {
+            "title": null,
+            "format": null
+          }
+        }
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "fontSize": 11,
+        "fontWeight": "bold"
+      },
+      "encoding": {
+        "text": {
+          "field": null,
+          "type": "quantitative",
+          "format": null
+        },
+        "color": {
+          "field": "threshold_aggregate_c",
+          "type": "nominal",
+          "scale": {
+            "domain": [false, true],
+            "range": ["black", "white"]
+          },
+          "legend": null
+        }
+      }
+    }
+  ]
+}

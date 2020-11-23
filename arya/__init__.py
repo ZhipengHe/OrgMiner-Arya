@@ -9,7 +9,7 @@ app = Flask(__name__)
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 APP_STATIC = os.path.join(APP_ROOT, app.static_folder)
 
-def create_app(demo=False):
+def create_app(demo=False, test=False):
     app.demo = demo
     app.debug = True
     app.config['SECRET_KEY'] = 'orgminer-arya'
@@ -34,6 +34,10 @@ def create_app(demo=False):
         app.register_blueprint(discovery.bp)
     else:
         print('NOTE: [OrgMiner-Arya started as demo-only]')
+    
+    if test:
+        from . import tests
+        app.register_blueprint(tests.bp)
 
     app.url_build_error_handlers.append(url_build_error_handler_null)
 

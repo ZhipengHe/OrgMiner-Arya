@@ -1,0 +1,106 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v4.json",
+  "description": "re-orderable matrix",
+  "title": null,
+
+  "transform": [
+    {"calculate": "year(datum.date)", "as": "year"},
+    {"calculate": "month(datum.date)", "as": "month"},
+    {"filter": {"selection": "Granularity"}}
+  ],
+
+  "facet": {
+    "column": {
+      "field": "group",
+      "type": "nominal"
+    }
+  },
+
+  "config": {
+    "view": {
+      "stroke": "transparent"
+    },
+    "range": {
+      "heatmap": {
+        "scheme": null
+      }
+    },
+    "axis": {
+      "domain": true
+    },
+    "axisX": {
+      "labelAngle": -45
+    }
+  },
+
+  "spec": {
+    "width": {"step": 40},
+    "height": {"step": 40},
+    "encoding": {
+      "x": {
+        "field": null,
+        "title": null
+      },
+      "y": {
+        "field": null,
+        "title": null
+      }
+    },
+    "layer": [
+      {
+        "selection": {
+          "Granularity": {
+            "type": "single", "fields": ["year", "month"],
+            "init": {"year": 2011, "month": 1},
+            "bind": {
+              "year": {"input": "range", "min": 2011, "max": 2014, "step": 1},
+              "month": {"input": "range", "min": 0, "max": 11, "step": 1}
+            }
+          }
+        },
+        "mark": "rect",
+        "encoding": {
+          "color": {
+            "aggregate": "min",
+            "field": null,
+            "type": "quantitative",
+            "legend": {
+              "title": null,
+              "format": null
+            }
+          }
+        }
+      },
+      {
+        "mark": {
+          "type": "text",
+          "fontSize": 11,
+          "fontWeight": "bold"
+        },
+        "encoding": {
+          "text": {
+            "aggregate": "min",
+            "field": null,
+            "type": "quantitative",
+            "format": null
+          },
+          "color": {
+            "field": "threshold_aggregate_c",
+            "type": "nominal",
+            "scale": {
+              "domain": [false, true],
+              "range": ["black", "white"]
+            },
+            "legend": null
+          }
+        }
+      }
+    ]
+  },
+
+  "resolve": {
+    "scale": {
+      "x": "independent"
+    }
+  }
+}
